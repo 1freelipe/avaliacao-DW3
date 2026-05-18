@@ -13,7 +13,7 @@ cd Pratica_TDD_5/
 virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
-cd agenda/
+cd linkpedia/
 python manage.py migrate
 python manage.py test
 coverage run --source='.' manage.py test 
@@ -34,7 +34,7 @@ activate.bat
 cd ..
 cd ..
 pip install -r requirements.txt
-cd agenda/
+cd linkpedia/
 python manage.py migrate
 python manage.py test
 coverage run --source='.' manage.py test 
