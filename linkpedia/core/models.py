@@ -7,3 +7,4 @@ class LinkModel(models.Model):
 
     def __str__(self):
         return f"{self.titulo} - {self.link}"
+    

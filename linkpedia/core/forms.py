@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
+from .models import LinkModel
 
 class LoginForm(ModelForm):
     class Meta:
@@ -46,3 +47,9 @@ class LoginForm(ModelForm):
                 raise ValidationError("Senha incorreta para o e-mail informado.")
 
             self.user = user
+
+class LinkForm(ModelForm):
+
+    class Meta:
+        model = LinkModel
+        fields = { 'titulo', 'link', 'observacao' }
