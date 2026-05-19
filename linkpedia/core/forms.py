@@ -61,10 +61,10 @@ class LinkForm(ModelForm):
         }
         error_messages = {
             'titulo': {
-                'required': ("O título é obrigatório")
+                'required': ("O título é obrigatório"),
+                'max_length': ('O título precisa ter no máximo 150 caracteres')
             },
             'link': {
                 'required': ('A URL é obrigatória')
             }
         }
-

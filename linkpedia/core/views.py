@@ -52,3 +52,9 @@ def create(request):
 
     # Enviando o form na requisição
     return render(request, 'create.html', { 'form': form })
+
+@login_required
+def all(request):
+    allLinks = LinkModel.objects.all()
+
+    return render(request, 'table.html', { 'links': allLinks })
