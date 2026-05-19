@@ -52,4 +52,19 @@ class LinkForm(ModelForm):
 
     class Meta:
         model = LinkModel
-        fields = { 'titulo', 'link', 'observacao' }
+        fields = ['titulo', 'link', 'observacao']
+        labels = { 'titulo': 'Título', 'link': 'Link', 'observacao': 'Observação', }
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Digite o título do link'}),
+            'link': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Digite a URL' }),
+            'observacao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Digite a observação'})
+        }
+        error_messages = {
+            'titulo': {
+                'required': ("O título é obrigatório")
+            },
+            'link': {
+                'required': ('A URL é obrigatória')
+            }
+        }
+

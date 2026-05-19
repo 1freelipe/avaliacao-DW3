@@ -42,10 +42,13 @@ def create(request):
             form.save()
             # Redirecionando para a home page
             return redirect(home)
+        else:
+            print(form.errors)
         
     else:
         # Se der errado, ele me devolve meu próprio form vazio
         form = LinkForm()
+        
 
     # Enviando o form na requisição
-    return render(request, 'create.html', { 'form': LinkForm })
+    return render(request, 'create.html', { 'form': form })
