@@ -4,6 +4,15 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class LinkTest(TestCase):
+    
+    def test_requires_login(self):
+
+        response = self.client.get(
+            reverse('create')
+        )
+
+        # Retornando 302 (redirect) caso o usuário não esteja autenticado
+        self.assertEqual(response.status_code, 302)
 
     def test_create(self):
         # Criando autenticação temporária para o teste depois de fechar a rota para usuários autenticados
