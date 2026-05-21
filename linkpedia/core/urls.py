@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import login, logout, home, create, all, delete, edit
+from core.views import login, logout, home, create, all, delete, edit, search, searchAndDelete
 
 
 urlpatterns = [
@@ -10,5 +10,7 @@ urlpatterns = [
     path('create/', create, name='create'),
     path('table/', all, name='table'),
     path('delete/<int:id>/', delete, name='delete'),
-    path('edit/<int:id>/', edit, name='edit')
+    path('edit/<int:id>/', edit, name='edit'),
+    path('search/', search, name='search'),
+    path('serachDelete', searchAndDelete, name='deleteUnique')
 ]

@@ -59,6 +59,16 @@ def all(request):
 
     return render(request, 'table.html', { 'links': allLinks })
 
+def search(request):
+    allLinks = LinkModel.objects.all()
+
+    return render(request, 'editUniq.html', { 'links': allLinks })
+
+def searchAndDelete(request):
+    allLinks = LinkModel.objects.all()
+
+    return render(request, 'deleteUniq.html', { 'links': allLinks })
+
 @login_required
 def delete(request, id):
     # Capturando o objeto através do ID, mas se ele não encontrar, me retorna 404
@@ -94,3 +104,4 @@ def edit(request, id):
         form = LinkForm(instance=link)
     
     return render(request, 'edit.html', { 'form': form })
+
