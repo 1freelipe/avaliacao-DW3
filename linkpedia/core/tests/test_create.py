@@ -73,3 +73,23 @@ class LinkTest(TestCase):
         self.assertEqual(LinkModel.objects.count(), 0)
 
         self.assertContains(response, 'O título é obrigatório')
+
+    def test_template(self):
+        # Criando usuário temporário para autenticação
+        user = User.objects.create_user(
+            username='aluno',
+            password='fatec'
+        )
+
+        self.client.login(
+            username='aluno',
+            password='fatec'
+        )
+
+        response = self.client.post(
+            reverse('create')
+        )
+
+        self.assertTemplateUsed(
+            response, 'create.html'
+        )
