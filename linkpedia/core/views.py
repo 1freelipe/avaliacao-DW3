@@ -61,12 +61,36 @@ def all(request):
 
 @login_required
 def delete(request, id):
-    
+    # Capturando o objeto através do ID, mas se ele não encontrar, me retorna 404
     link = get_object_or_404(
         LinkModel,
         id=id
     )
 
+    # Deletando se achar a instancia no banco
     link.delete()
 
     return redirect('table')
+
+@login_required
+def edit(request, id):
+    # Capturar o objeto no banco de dados
+    link = LinkModel.objects.get(id=id)
+
+    if request.method == 'POST':
+        # Parametrizando meu linkform
+        form = LinkForm(
+            request.POST,
+            instance=link # Mantendo meu objeto atual com as informações que vieram do banco
+        )
+
+        # Validando o formulário
+        if form.is_valid():
+            form.save()
+            return redirect('table')
+
+    # Matendo a minha instancia no banco intacta em caso de erro
+    else:
+        form = LinkForm(instance=link)
+    
+    return render(request, 'edit.html', { 'form': form })
