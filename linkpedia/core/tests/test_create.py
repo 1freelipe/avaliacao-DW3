@@ -43,3 +43,33 @@ class LinkTest(TestCase):
         link = LinkModel.objects.first()
 
         self.assertEqual(link.titulo, 'Google')
+
+    def test_create_invalid_link(self):
+        # Criando autenticação temporária no banco
+        user = User.objects.create_user(
+            username='aluno',
+            password='fatec'
+        )
+
+        # Logando temporariamente para o teste
+        self.client.login(
+            username='aluno',
+            password='fatec'
+        )
+
+        # Criando um falso objeto vazio
+        response = self.client.post(
+            reverse('create'),
+            {
+                'titulo': '',
+                'link': ''
+            }
+        )
+
+        # Verificando a resposta HTTP
+        self.assertEqual(response.status_code, 200)
+
+        # Certificando que o objeto não foi criado no banco
+        self.assertEqual(LinkModel.objects.count(), 0)
+
+        self.assertContains(response, 'O título é obrigatório')

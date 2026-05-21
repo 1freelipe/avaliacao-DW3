@@ -41,9 +41,7 @@ def create(request):
             # Salvando no banco
             form.save()
             # Redirecionando para a home page
-            return redirect(home)
-        else:
-            print(form.errors)
+            return redirect('home')
         
     else:
         # Se der errado, ele me devolve meu próprio form vazio
@@ -59,11 +57,13 @@ def all(request):
 
     return render(request, 'table.html', { 'links': allLinks })
 
+@login_required
 def search(request):
     allLinks = LinkModel.objects.all()
 
     return render(request, 'editUniq.html', { 'links': allLinks })
 
+@login_required
 def searchAndDelete(request):
     allLinks = LinkModel.objects.all()
 
