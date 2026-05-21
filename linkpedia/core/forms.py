@@ -65,6 +65,6 @@ class LinkForm(ModelForm):
                 'max_length': ('O título precisa ter no máximo 150 caracteres')
             },
             'link': {
-                'required': ('A URL é obrigatória')
+                'required': ('A URL é obrigatória e precisa ser válida')
             }
         }

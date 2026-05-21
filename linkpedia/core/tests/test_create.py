@@ -80,16 +80,38 @@ class LinkTest(TestCase):
             username='aluno',
             password='fatec'
         )
-
+        # Logando temporariamente
         self.client.login(
             username='aluno',
             password='fatec'
         )
-
+        # Criando a rota temporária para onde essa view aponta
         response = self.client.post(
             reverse('create')
         )
-
+        # Verificando se é o template correto que está sendo utilizado
         self.assertTemplateUsed(
             response, 'create.html'
         )
+
+    def test_invalid_url(self):
+        # Criando um usário temporariamente
+        user = User.objects.create_user(
+            username='aluno',
+            password='fatec'
+        )
+        # Logando o usuário
+        self.client.login(
+            username='aluno',
+            password='fatec'
+        )
+        # Simulando o envio pelo cliente
+        response = self.client.post(
+            reverse('create'),
+            {
+                'titulo': 'teste',
+                'url': 'url teste'
+            }
+        )
+        # Verificando a resposta do sistema
+        self.assertContains(response, 'A URL é obrigatória e precisa ser válida')
