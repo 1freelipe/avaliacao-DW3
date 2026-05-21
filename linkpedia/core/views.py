@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from core.forms import LoginForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -58,3 +58,15 @@ def all(request):
     allLinks = LinkModel.objects.all()
 
     return render(request, 'table.html', { 'links': allLinks })
+
+@login_required
+def delete(request, id):
+    
+    link = get_object_or_404(
+        LinkModel,
+        id=id
+    )
+
+    link.delete()
+
+    return redirect('table')
