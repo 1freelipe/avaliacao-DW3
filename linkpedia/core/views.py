@@ -85,7 +85,10 @@ def delete(request, id):
 @login_required
 def edit(request, id):
     # Capturar o objeto no banco de dados
-    link = LinkModel.objects.get(id=id)
+    link = get_object_or_404(
+        LinkModel,
+        id=id
+    )
 
     if request.method == 'POST':
         # Parametrizando meu linkform
