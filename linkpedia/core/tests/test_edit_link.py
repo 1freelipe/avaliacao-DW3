@@ -63,3 +63,29 @@ class LinkTest(TestCase):
 
         # Testando a resposta
         self.assertEqual(response.status_code, 404)
+
+    def test_template(self):
+        # Criando um usuário temporário
+        user = User.objects.create_user(
+            username='aluno',
+            password='fatec'
+        )
+        # Logando o usuário temporariamente
+        self.client.login(
+            username='aluno',
+            password='fatec'
+        )
+
+        # Instanciando um objeto no banco
+        link = LinkModel.objects.create(
+            titulo='Google',
+            link='https://www.google.com'
+        )
+
+        # Criando uma rota temporária
+        response = self.client.get(
+            reverse('edit', args=[link.id])
+        )
+
+        # Verificando a resposta do template utilizado
+        self.assertTemplateUsed(response, 'edit.html')
